@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Employee API",
+    "description": "API for managing employees",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8091",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/employees": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Create a new employee",
+        "description": "This API creates a new employee in the system.",
+        "operationId": "createEmployee",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Employee object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee successfully created",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/employees/{id}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Get an employee by ID",
+        "description": "This API retrieves an employee by their ID.",
+        "operationId": "getEmployeeById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the employee to retrieve",
+            "required": true,
+            "type": "integer",
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            },
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "firstName": "Panji",
+                "lastName": "Denis",
+                "email": "panjidenisgiantoroo@gmail.com"
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+    "/api/employees/all": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Get All employees",
+        "description": "This API retrieves all employee",
+        "operationId": "getAllEmployees",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employees successfully retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "firstName": "Panji",
+                  "lastName": "Denis",
+                  "email": "panjidenisgiantoroo@gmail.com"
+                },
+                {
+                  "id": 2,
+                  "firstName": "Giantoro",
+                  "lastName": "hao",
+                  "email": "panjidenisgiantoroo1@gmail.com"
+                },
+                {
+                  "id": 3,
+                  "firstName": "Giantoro",
+                  "lastName": "hao1",
+                  "email": "panjidenisgiantoroo2@gmail.com"
+                },
+                {
+                  "id": 504,
+                  "firstName": "Giantoro",
+                  "lastName": "hao3",
+                  "email": "panjidenisgiantoroo4@gmail.com"
+                },
+                {
+                  "id": 503,
+                  "firstName": "Giantoro",
+                  "lastName": "hao6",
+                  "email": "panjidenisgiantoroo6@gmail.com"
+                }
+              ]
+            }
+          },
+          "404": {
+            "description": "Employees not found"
+          }
+        }
+
+      }
+    },
+    "/api/employees/update/{id}": {
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Update an employee by ID",
+        "description": "This API updates an employee by their ID.",
+        "operationId": "updateEmployee",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the employee to update",
+            "required": true,
+            "type": "integer",
+            "example": 1
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Employee details to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            },
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "firstName": "Panji2",
+                "lastName": "Denis2",
+                "email": "panjidenisgiantoroo3@gmail.com"
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+
+      }
+    },
+
+    "definitions": {
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 503
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Giantoro"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "hao2"
+          },
+          "email": {
+            "type": "string",
+            "example": "panjidenisgiantoroo3@gmail.com"
+          }
+        }
+      },
+      "EmployeeUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Panji2"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Denis2"
+          },
+          "email": {
+            "type": "string",
+            "example": "panjidenisgiantoroo3@gmail.com"
+          }
+        }
+      }
+    }
+  }
+}
